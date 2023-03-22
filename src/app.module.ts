@@ -14,10 +14,10 @@ import { TicketTierModule } from './ticket-tier/ticket-tier.module';
       username: 'postgres',
       password: 'Qk2Rts91x9WES5au3sFA',
       database: 'railway',
-      entities: [], // TODO: add your entities here
+      entities: [TicketTierModule],
       synchronize: true, // set to false in production
     }),
-    TicketTierModule,
+    TypeOrmModule.forFeature([TicketTierModule]),
   ],
   controllers: [AppController],
   providers: [AppService],
