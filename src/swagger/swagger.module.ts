@@ -1,13 +1,13 @@
 import { Module } from '@nestjs/common';
-import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
-import { AppController } from 'src/app.controller';
-import { AppService } from 'src/app.service';
 import { NestApplication } from '@nestjs/core';
+import { TicketTierController } from 'src/ticket-tier/ticket-tier.controller';
+import { TicketTierModule } from 'src/ticket-tier/ticket-tier.module';
+import { TicketTierService } from 'src/ticket-tier/ticket-tier.service';
 
 @Module({
-  imports: [],
-  controllers: [AppController],
-  providers: [AppService],
+  imports: [TicketTierModule],
+  controllers: [TicketTierController],
+  providers: [TicketTierService],
 })
 export class AppModule {
     app: NestApplication;

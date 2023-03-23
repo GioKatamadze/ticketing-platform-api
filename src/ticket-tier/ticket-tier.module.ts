@@ -1,27 +1,13 @@
-import { Entity, Column, PrimaryGeneratedColumn, BeforeInsert, BeforeUpdate } from 'typeorm';
+import { Module } from '@nestjs/common';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { TicketTier } from './ticket-tier.entity';
+import { TicketTierController } from './ticket-tier.controller';
+import { TicketTierService } from './ticket-tier.service';
 
-@Entity()
-export class TicketTierModule {
-  @PrimaryGeneratedColumn()
-  id: number;
-
-  @Column({ type: 'decimal', precision: 5, scale: 2 })
-  serviceFeeRate: number;
-
-  @Column({ type: 'decimal', precision: 5, scale: 2 })
-  minimumFee: number;
-
-  @Column({ type: 'decimal', precision: 8, scale: 2 })
-  buyerPrice: number;
-
-  @Column({ type: 'decimal', precision: 8, scale: 2 })
-  promoterReceivesPrice: number;
-
-  @BeforeInsert()
-  calculateFee() {
-    // Calculate the service fee based on the service fee rate and minimum fee
-    const serviceFee = Math.max(this.buyerPrice * this.serviceFeeRate / 100, this.minimumFee);
-    // Calculate the promoter receives price as the difference between the buyer price and service fee
-    this.promoterReceivesPrice = this.buyerPrice - serviceFee;
-  }
-}
+@Module({
+  imports: [TypeOrmModule.forFeature([TicketTier])],
+  controllers: [TicketTierController],
+  providers: [TicketTierService],
+  exports: [TicketTierService],
+})
+export class TicketTierModule {}
