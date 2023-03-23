@@ -16,7 +16,7 @@ import { TicketTier } from './ticket-tier/ticket-tier.entity';
       password: 'Qk2Rts91x9WES5au3sFA',
       database: 'railway',
       entities: [TicketTier],
-      synchronize: true, // set to false in production
+      synchronize: false,
     }),
     TypeOrmModule.forFeature([TicketTier]),
   ],
